@@ -96,8 +96,8 @@ app.get('/category/:name', (req, res) => {
 })
 
 app.get('/cookie', (req, res) => {
-  req.cookies;
-  res.setCookie('name', encodeURIComponent(name), {
+  req.cookies['cookie_name'];
+  res.cookie('name', encodeURIComponent(name), {
     httpOnly: true,
     path: '/'
   })
