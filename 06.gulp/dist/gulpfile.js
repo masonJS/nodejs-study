@@ -1,0 +1,1 @@
+"use strict";var _require=require("gulp"),series=_require.series,parallel=_require.parallel,src=_require.src,dest=_require.dest,babel=require("gulp-babel"),uglify=require("gulp-uglify");function first(){return src("./*.js").pipe(babel({presets:["@babel/preset-env"]})).pipe(uglify()).pipe(dest("./dist"))}function second(){}function third(){}exports.default=series(first);
