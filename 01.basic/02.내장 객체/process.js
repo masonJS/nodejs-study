@@ -11,7 +11,7 @@ const secretId = process.env.SECRET_ID
 // micro task queue 에 저장
 // 일반적인 비동기 이벤트보다 높은 우선순위
 process.nextTick(() => {
-  console.log('micro task queu')
+  console.log('micro task queue')
 })
 
 /**
