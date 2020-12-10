@@ -3,11 +3,15 @@ import path from 'path';
 import express from 'express';
 
 const router = express.Router();
-const indexJs = path.dirname(__filename);
-
-fs.readdirSync(__dirname)
+const moduleURL = new URL(import.meta.url).pathname;
+// const indexJs = path.dirname(__filename);
+const indexJs = path.dirname(moduleURL);
+fs.readdirSync(indexJs)
   .filter(file => (file.indexOf('.') !== 0) && (file !== indexJs) && (file.slice(-9) === '.route.js'))
-  .forEach(routeFile => router.use(`/${routeFile.split('.')[0]}`, require(`./${routeFile}`).default))
+  .forEach(async routeFile => {
+    const { default: module } = await import(`./${routeFile}`)
+    return router.use(`/${routeFile.split('.')[0]}`, module)
+  })
 
 
-export default router 
+export default router

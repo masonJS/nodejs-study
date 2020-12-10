@@ -1,12 +1,15 @@
-require('dotenv').config()
-
+// require('dotenv').config()
+import 'dotenv/config.js';
 import createError from 'http-errors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import v1Route from './routes/v1'
+import v1Route from './routes/v1/index.js';
+import connect from './models/index.js';
 
 const app = express();
+
+connect();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -37,4 +40,4 @@ app.use(function(err, req, res, next) {
     .json({ message: apiError.message });
 });
 
-module.exports = app;
+export default app;
